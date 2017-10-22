@@ -31,6 +31,12 @@ public:
   ///* predicted sigma points matrix
   MatrixXd Xsig_pred_;
 
+  /// predicted state mean
+  VectorXd x_mean_;
+
+  ///predicted state covariance matrix
+  MatrixXd P_cov_;
+
   ///* time when the state is true, in us
   long long time_us_;
 
@@ -67,6 +73,12 @@ public:
   ///* Sigma point spreading parameter
   double lambda_;
 
+  long previous_timestamp_;
+
+  double delta_t_;
+
+  bool isInCalc;
+
 
   /**
    * Constructor
@@ -102,6 +114,16 @@ public:
    * @param meas_package The measurement at k+1
    */
   void UpdateRadar(MeasurementPackage meas_package);
+
+  void AugmentedSigmaPoints(MatrixXd* Xsig_out);
+  void SigmaPointPrediction(MatrixXd* Xsig_out);
+  void PredictMeanAndCovariance(VectorXd* x_out, MatrixXd* P_out);
+
+  void PredictRadarMeasurement(VectorXd* z_out, MatrixXd* S_out, MatrixXd* Z_out);
+  void UpdateStateRadar(VectorXd z, VectorXd* x_out, MatrixXd* P_out);
+
+  void PredictLidarMeasurement(VectorXd* z_out, MatrixXd* S_out, MatrixXd* Z_out);
+  void UpdateStateLidar(VectorXd z, VectorXd* x_out, MatrixXd* P_out);
 };
 
 #endif /* UKF_H */
