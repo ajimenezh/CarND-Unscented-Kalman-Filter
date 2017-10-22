@@ -1,7 +1,7 @@
-# Unscented Kalman Filter
+# Extended Kalman Filter
 Self-Driving Car Engineer Nanodegree Program
 
-n this project utilize an Unscented Kalman Filter to estimate the state of a moving object of interest with noisy lidar and radar measurements. It will use RMES to measure the results.
+This project implements an Extended Kalman Filter to estimate the state of a moving object of interest with noisy lidar and radar measurements. It will use RMES to measure the results.
 
 This project involves the Term 2 Simulator to which can be downloaded [here](https://github.com/udacity/self-driving-car-sim/releases)
 
@@ -54,9 +54,11 @@ OUTPUT: values provided by the c++ program to the simulator
 
 `main.cpp` Initialize the objects necessary for the calculation, and creates the server that reads the input (the lidar and radar measurements), process the data and sends the estimations to the simulator.
 
-`UKF` Class that contains the EKF object, and predicts the mean position and updates the internal structure.
+`FusionEKF` Class that contains the EKF object, and acts as the interface to process the measurement.
 
-`Tools` Contains the function to calculate the RMSE.
+`KalmanFilter` Implementation of the Kalman Filter. It has an update function which acts on the vector data of the measurement, and a predict function.
+
+`Tools` Contains thee functions to calculate the Jacobian and the RMSE.
 
 ## Results
 
